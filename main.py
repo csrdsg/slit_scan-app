@@ -15,7 +15,8 @@ else: pass
 
 tfile = tempfile.NamedTemporaryFile(delete=False) 
 tfile.write(f.read())
-clip = VideoFileClip(tfile.name)       
+clip = VideoFileClip(tfile.name)
+st.text(f'{filename} is {clip.fps} fps, for {clip.duration} seconds at {clip.size}')       
     
 img = np.zeros((clip.size[1], clip.size[0], 3), dtype='uint8')
 target_fps = clip.size[0] / clip.duration
