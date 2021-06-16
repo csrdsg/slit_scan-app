@@ -10,4 +10,4 @@ Finds the avarage color by slit.
 
 Dominant mode:
 Finds the dominant color by slit.
-![alt text](dominant.jpg)
+![alt text](dominant.jpeg)
