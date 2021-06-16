@@ -13,16 +13,23 @@ if f is None:
     st.stop()
 else: pass
 
-
+# makes a temporary file 
 tfile = tempfile.NamedTemporaryFile(delete=False) 
 tfile.write(f.read())
+
+# converting to VideoFileClip
 clip = VideoFileClip(tfile.name)
 st.info(f'Info: {f.name} is {clip.fps} fps, for {clip.duration} seconds at {clip.size} resolution.')       
 
-# in this case your keep the original resolution    
+# in this case your keep the original resolution
+# this image right now just a bunch of zeros    
 img = np.zeros((clip.size[1], clip.size[0], 3), dtype='uint8')
 target_fps = clip.size[0] / clip.duration
-slitwidth = 1
+
+
+slitwidth = st.slider('Slit size', min_value=1, max_value=50)
+
+
 last_frame = clip.size[0] - slitwidth
 
 # slider
@@ -30,10 +37,10 @@ slitpoint = st.slider('Choose the slit position', min_value=0, max_value=clip.si
 
 
 # here the width of the pics depens about the lenght of the video
-all_frame = int(clip.fps * clip.duration)
+all_frame = int(clip.fps * clip.duration) * slitwidth
 img2 = np.zeros((clip.size[1], all_frame, 3), dtype='uint8')
 last_frame2 = all_frame - slitwidth
-    
+
 
 def one_image(slitpoint, mode):
   currentX = 0
