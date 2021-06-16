@@ -2,4 +2,4 @@
 
 Normal mode: 
 
-!(normal.jpeg)
+![alt text](normal.jpeg)
