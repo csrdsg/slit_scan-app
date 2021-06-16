@@ -26,14 +26,19 @@ st.info(f'Info: {f.name} is {clip.fps} fps, for {clip.duration} seconds at {clip
 img = np.zeros((clip.size[1], clip.size[0], 3), dtype='uint8')
 target_fps = clip.size[0] / clip.duration
 
-
-slitwidth = st.slider('Slit size', min_value=1, max_value=50)
-
+# slider for slitwidth
+if st.checkbox('Unique slit size?', value=0) == 0:
+    slitwidth = 1
+else:
+    slitwidth = st.slider('Slit size (one by deafult)', min_value=1, max_value=50)
 
 last_frame = clip.size[0] - slitwidth
 
-# slider
-slitpoint = st.slider('Choose the slit position', min_value=0, max_value=clip.size[0])
+# slider for slitpoint
+if st.checkbox('Unique slit point? (the middle point is the deafult)', value=0) == 0:
+    slitpoint = clip.size[0] // 2
+else:
+    slitpoint = st.slider('Choose the slit position', min_value=0, max_value=clip.size[0])
 
 
 # here the width of the pics depens about the lenght of the video
