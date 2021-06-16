@@ -23,8 +23,10 @@ st.info(f'Info: {f.name} is {clip.fps} fps, for {clip.duration} seconds at {clip
 img = np.zeros((clip.size[1], clip.size[0], 3), dtype='uint8')
 target_fps = clip.size[0] / clip.duration
 slitwidth = 1
-slitpoint = st.slider('Choose the slit position', min_value=0, max_value=clip.size[0])
 last_frame = clip.size[0] - slitwidth
+
+# slider
+slitpoint = st.slider('Choose the slit position', min_value=0, max_value=clip.size[0])
 
 
 # here the width of the pics depens about the lenght of the video
