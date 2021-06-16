@@ -47,10 +47,10 @@ img2 = np.zeros((clip.size[1], all_frame, 3), dtype='uint8')
 last_frame2 = all_frame - slitwidth
 
 
-def one_image(slitpoint, mode):
+def one_image(slitpoint: int, mode: str):
   currentX = 0
   for i in clip.iter_frames(fps=target_fps, dtype='uint8'):
-      if currentX < last_frame:
+      if currentX <= last_frame:
           frame =  i[:,slitpoint:slitpoint + slitwidth,:]
           if mode == 'norm':
               pass
@@ -64,7 +64,7 @@ def one_image(slitpoint, mode):
   output = Image.fromarray(img)
   st.image(output)
 
-def one_image_origin(slitpoint, mode):
+def one_image_origin(slitpoint: int, mode: str):
   currentX = 0
   for i in clip.iter_frames(fps=clip.fps, dtype='uint8'):
       if currentX < last_frame2:
@@ -88,7 +88,7 @@ t = st.checkbox('Preserve original resolution', value=1)
 if t == 0:
     st.info(f'The pictures width now depends from the lenght of the video. It will be around {all_frame} pixel.')
 
-
+# the generator button and when all the magic happens
 if st.button('Generate img'):
     if mode == "Normal"  and t == 1:
         one_image(slitpoint, 'norm')
